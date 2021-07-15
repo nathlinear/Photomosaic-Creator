@@ -82,6 +82,8 @@ def main():
         outputImageName = input(
             "What should the name of the output image be including file extension?\n")
 
+        threshold = float(input("Threshold: "))
+
         # Check with the user if they got everything right
         if input(f"\nAre these settings correct?\nSquare Size: {squareSize}px\nScale: {scale}x\nInput Image: {inputImageName}\nOutput Image: {outputImageName}\n(Press Enter to continue. Enter anything else to try again.)\n") == "":
             break
@@ -128,7 +130,10 @@ def main():
                     break
                 elif distance == -1 or newdistance < distance:
                     distance = newdistance
+                    print(distance)
                     closestimage = pic[0]
+                    if distance < threshold:
+                        distance = 0
 
             newim.paste(closestimage, (xoffset * scale, yoffset * scale))
 
